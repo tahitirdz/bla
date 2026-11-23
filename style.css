@@ -1,0 +1,332 @@
+/* ========================================== */
+/* VARIABLES & THÈMES                         */
+/* ========================================== */
+
+/* Mode Girly (Par défaut) */
+body.mode-girly {
+  --rose: #ff4fa3;
+  --bonbon: #ffc2e2;
+  --pale: #fff0f8;
+  --violet: #b57bff;
+  --ciel: #a8e6ff;
+  --texte: #5a1740;
+  --blanc: #ffffff;
+  --fond-body: var(--bonbon) radial-gradient(var(--blanc) 2px, transparent 2px) 0 0 / 26px 26px;
+  --font-principal: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --font-titre: "Pacifico", "Brush Script MT", cursive;
+}
+
+/* Mode Dark Web (Antagoniste) */
+body.mode-dark {
+  --rose: #ff0055;         /* Rouge Glitch / Alerte */
+  --bonbon: #0d0208;       /* Fond Sombre Matrix */
+  --pale: #1a0915;         /* Zone de texte sombre */
+  --violet: #00ff66;       /* Vert Néon Hack */
+  --ciel: #00f0ff;
+  --texte: #00ff66;        /* Texte vert matrice */
+  --blanc: #000000;        /* Fond de boîte noir */
+  --fond-body: #05020a linear-gradient(0deg, rgba(0, 0, 0, 0.8) 50%, rgba(0, 255, 102, 0.05) 50%) 0 0 / 100% 4px;
+  --font-principal: "Fira Code", monospace, sans-serif;
+  --font-titre: "VT323", monospace, sans-serif;
+}
+
+/* ========================================== */
+/* STYLES GENERAUX                            */
+/* ========================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-principal);
+  line-height: 1.6;
+  color: var(--texte);
+  background: var(--fond-body);
+  transition: all 0.3s ease;
+}
+
+a { 
+  color: var(--violet); 
+  font-weight: 500; 
+}
+
+/* GESTION D'AFFICHAGE DES VUES */
+body.mode-girly #vue-dark { display: none; }
+body.mode-dark #vue-girly { display: none; }
+
+/* Effet Scanline CRT pour le Dark Web */
+body.mode-dark .crt-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* ========================================== */
+/* BOUTON DE BASCULEMENT DE MODE              */
+/* ========================================== */
+
+.portail-container {
+  margin-top: 1.5rem;
+}
+
+.bouton-switch {
+  background: var(--violet);
+  color: #000;
+  font-family: var(--font-principal);
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  border: 3px solid var(--rose);
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.bouton-switch:hover {
+  transform: scale(1.05);
+}
+
+body.mode-dark .bouton-switch {
+  background: var(--rose);
+  color: #fff;
+  border-color: var(--violet);
+  border-radius: 0px;
+  text-transform: uppercase;
+  box-shadow: 0 0 10px var(--rose);
+}
+
+/* ========================================== */
+/* EN-TÊTE                                    */
+/* ========================================== */
+
+.haut {
+  text-align: center;
+  padding: 2.5rem 1rem 1.5rem;
+}
+
+.etoiles {
+  color: var(--violet);
+  letter-spacing: 0.5rem;
+  font-size: 1.4rem;
+  text-shadow: 0 0 8px var(--rose);
+}
+
+h1 {
+  font-family: var(--font-titre);
+  font-weight: 400;
+  font-size: clamp(2rem, 7vw, 4rem);
+  line-height: 1.2;
+  color: var(--rose);
+  text-shadow: 3px 3px 0 var(--violet);
+}
+
+body.mode-girly h1 {
+  color: #ffffff;
+  text-shadow: 3px 3px 0 var(--rose), 6px 6px 0 var(--violet);
+}
+
+.sous-titre {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.3rem 1.2rem;
+  background: var(--blanc);
+  border: 2px dashed var(--rose);
+  border-radius: 999px;
+  color: var(--texte);
+}
+
+body.mode-dark .sous-titre {
+  border-radius: 0px;
+  border-style: solid;
+}
+
+/* ========================================== */
+/* BANDEAU DÉFILANT                           */
+/* ========================================== */
+
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--rose);
+  color: #fff;
+  border-block: 3px solid var(--violet);
+  padding: 0.4rem 0;
+  font-weight: bold;
+}
+
+.ticker span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: defile 40s linear infinite;
+}
+
+@keyframes defile {
+  to { transform: translateX(-100%); }
+}
+
+/* ========================================== */
+/* MISE EN PAGE & FENÊTRES                    */
+/* ========================================== */
+
+.page {
+  max-width: 68rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+main, aside { 
+  display: grid; 
+  gap: 1.5rem; 
+}
+
+.fenetre {
+  background: var(--blanc);
+  border: 3px solid var(--rose);
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 var(--violet);
+  overflow: hidden;
+}
+
+body.mode-dark .fenetre {
+  border-radius: 0px;
+  box-shadow: 4px 4px 0 var(--rose);
+}
+
+.fenetre h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(90deg, var(--rose), var(--violet));
+}
+
+body.mode-dark .fenetre h2 {
+  color: #000;
+  font-family: var(--font-titre);
+  font-size: 1.4rem;
+}
+
+.fenetre h2::after {
+  content: "– □ ×";
+  letter-spacing: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.corps { 
+  padding: 1.2rem 1.4rem; 
+}
+
+.corps p + p, .corps p + ul { 
+  margin-top: 0.8rem; 
+}
+
+.corps ul { 
+  list-style: none; 
+}
+
+.corps li { 
+  padding-left: 1.6rem; 
+  position: relative; 
+  margin-top: 0.5rem; 
+}
+
+.corps li::before {
+  content: "♡";
+  color: var(--rose);
+  position: absolute;
+  left: 0;
+}
+
+body.mode-dark .corps li::before {
+  content: ">";
+  color: var(--violet);
+}
+
+/* ========================================== */
+/* CHIFFRES CLÉS & HORLOGE                    */
+/* ========================================== */
+
+.stats p, .horloge {
+  background: var(--pale);
+  border-radius: 10px;
+  padding: 0.8rem;
+  text-align: center;
+  border: 1px solid var(--rose);
+}
+
+body.mode-dark .stats p, body.mode-dark .horloge {
+  border-radius: 0px;
+}
+
+.stats strong {
+  display: block;
+  font-family: var(--font-titre);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.2;
+  color: var(--rose);
+}
+
+.horloge + .horloge { 
+  margin-top: 0.8rem; 
+}
+
+.horloge h3 { 
+  color: var(--violet); 
+}
+
+.heure { 
+  font-size: 1.8rem; 
+  font-weight: 600; 
+  color: var(--rose); 
+}
+
+.date { 
+  text-transform: capitalize; 
+}
+
+/* ========================================== */
+/* PIED DE PAGE & RESPONSIVE                  */
+/* ========================================== */
+
+.pied {
+  text-align: center;
+  background: var(--rose);
+  color: #fff;
+  padding: 1.2rem 1rem;
+  border-top: 3px solid var(--violet);
+  margin-top: 2rem;
+}
+
+body.mode-dark .pied {
+  color: #000;
+  font-weight: bold;
+}
+
+a:focus-visible { 
+  outline: 3px solid var(--violet); 
+  outline-offset: 3px; 
+}
+
+@media (max-width: 800px) {
+  .page { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker span { animation: none; padding-left: 0; }
+  .ticker { overflow-x: auto; }
+}

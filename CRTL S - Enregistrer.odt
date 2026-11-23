@@ -1,0 +1,192 @@
+/* ==========================================================
+   1. VARIABLES : les couleurs et réglages au même endroit.
+   Changez une valeur ici, et toute la page est mise à jour !
+   ========================================================== */
+:root {
+  --marine: #14213d;      /* fond foncé et texte */
+  --papier: #f6f8fc;      /* fond clair de la page */
+  --soleil: #ffc857;      /* couleur d'accent (boutons) */
+  --gris: #4a5470;        /* texte secondaire */
+  --blanc: #ffffff;
+  --arrondi: 14px;
+}
+
+/* ==========================================================
+   2. RÉGLAGES DE BASE
+   ========================================================== */
+* {
+  box-sizing: border-box;  /* simplifie le calcul des tailles */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* défilement doux vers les ancres */
+}
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--marine);
+  background: var(--papier);
+}
+
+a {
+  color: inherit;
+}
+
+/* ==========================================================
+   3. EN-TÊTE : menu + grande zone d'accueil
+   ========================================================== */
+.entete {
+  background: var(--marine);
+  color: var(--blanc);
+  padding: 0 1.5rem 5rem;
+}
+
+.menu {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1.5rem 0;
+  display: flex;                 /* place les éléments côte à côte */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.menu ul a {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.menu ul a:hover {
+  opacity: 1;
+  text-decoration: underline;
+  text-decoration-color: var(--soleil);
+  text-underline-offset: 6px;
+}
+
+.hero {
+  max-width: 64rem;
+  margin: 4rem auto 0;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 4.2rem); /* s'adapte à la taille de l'écran */
+  line-height: 1.1;
+  max-width: 18ch;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 45ch;
+  margin-bottom: 2rem;
+  color: #c9d1e6;
+}
+
+/* ==========================================================
+   4. BOUTON
+   ========================================================== */
+.bouton {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  background: var(--soleil);
+  color: var(--marine);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: transform 0.2s;
+}
+
+.bouton:hover {
+  transform: translateY(-3px);
+}
+
+/* ==========================================================
+   5. SECTIONS ET CARTES
+   ========================================================== */
+.section {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cartes {
+  display: grid;                                  /* mise en grille */
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}
+
+.carte {
+  background: var(--blanc);
+  padding: 1.8rem;
+  border-radius: var(--arrondi);
+  border-top: 6px solid var(--soleil);
+  box-shadow: 0 8px 24px rgba(20, 33, 61, 0.08);
+}
+
+.carte h3 {
+  margin-bottom: 0.6rem;
+}
+
+.carte p {
+  color: var(--gris);
+}
+
+/* ==========================================================
+   6. SECTION CONTACT ET PIED DE PAGE
+   ========================================================== */
+.section-contact {
+  text-align: center;
+}
+
+.section-contact p {
+  max-width: 40ch;
+  margin: 0 auto 2rem;
+  color: var(--gris);
+}
+
+.pied {
+  background: var(--marine);
+  color: #c9d1e6;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================
+   7. CONFORT D'UTILISATION
+   ========================================================== */
+a:focus-visible {
+  outline: 3px solid var(--soleil);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .menu {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .bouton { transition: none; }
+}
